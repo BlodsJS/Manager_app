@@ -1,5 +1,6 @@
 import os
 import sys
+import time
 
 from core.tasks import tasks_manager
 from storage.db_json import data_base
@@ -16,6 +17,7 @@ def screens_control():
 def main_screen():
     MENU_TEXT = (
         " Gerenciador de Tarefas - Tela Principal\n\n"
+        f"{'...'*20}\n"
         " 1. Tarefas\n"
         " 2. Configurações\n"
         " 3. Limpar tela\n"
@@ -33,6 +35,8 @@ def main_screen():
             clear()
             return "main"
         case "4":
+            print(" Encerrando...")
+            time.sleep(1)
             sys.exit()
         case _:
             print("opção invalida")
@@ -40,6 +44,7 @@ def main_screen():
 def tasks_screen():
     MENU_TEXT = (
         "Gerenciador de Tarefas - Tela de Tarefas\n\n"
+        f"{'...'*20}\n"
         " 1. Ver todas as tarefas\n"
         " 2. Ver uma tarefa\n"
         " 3. Criar uma tarefa\n"
@@ -50,17 +55,22 @@ def tasks_screen():
     )
     print(MENU_TEXT)
     choice = input(">>> ")
+
     match choice:
         case "1":
+            clear()
             task_control.view_all_tasks()
             return "task"
         case "2":
+            clear()
             task_control.view_task()
             return "task"
         case "3":
+            clear()
             task_control.add_task()
             return "task"
         case "4":
+            clear()
             task_control.save_tasks(task_control.data)
             return "task"
         case "5":
@@ -68,14 +78,17 @@ def tasks_screen():
             return "task"
         case "6":
             print("retornando ao menu pricipal...")
+            time.sleep(1)
             return "main"
         case _:
             print("Opção invalida")
+            time.sleep(1)
             return "task"
 
 def config_screen():
     MENU_TEXT = (
         " Gerenciador de tarefas - Tela de configuração\n\n"
+        f"{'...'*20}\n"
         " 1. Banco de dados\n"
         " 2. Cores\n"
         " 3. Limpar tela\n"
@@ -95,9 +108,11 @@ def config_screen():
             return "config"
         case "4":
             print(" retorando ao menu principal...")
+            time.sleep(1)
             return "main"
         case _:
             print("opção invalida")
+            time.sleep(1)
             return "config"
 screens = {
     "task": tasks_screen,

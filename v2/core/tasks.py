@@ -9,9 +9,9 @@ class tasks_manager:
         self.data = self.db.get_data()
 
     def add_task(self):
-        print(" Gerenciador de Tarefas - Adicionar Tarefa")
         MENU_TEXT = (
             "Gerenciador de Tarefas - Adicionar Tarefa\n\n"
+            f"{'...'*20}\n"
             " Para criar uma nova tarefa, serão pedidas algumas informações leia atentamente e complete\n"
             " * obrigatorias\n"
             " 1. Nome da tarefa*\n"
@@ -42,12 +42,32 @@ class tasks_manager:
         return "task"
 
 
-    def remove_task(self):
-        print(" remove uma tarefa")
+    def remove_task(self, task):
+        MENU_TEXT = (
+            " Gerenciador de Tarefas - Editor de Tarefas\n\n"
+            f"{'...'*20}\n"
+            " Antes de excluir, confira o titulo e a exclusão da tarefa\n"
+            f" Tarefa: {task['name']}\n\n"
+            " apos a confirmação, yes (y) para continuar a exclusão ou no (n) para cancelar\n"
+        )
+        print(MENU_TEXT)
+        choice = input(">>> ")
+        match choice:
+            case "yes":
+                task['_delete'] = True
+            case "y":
+                task['_delete'] = True
+            case _:
+                print(" Exclusão cancelada, Retornando a tela anterior por segurança...")
+                time.sleep(1)
+                return "task"
+        print(" Exclusão confirmada, Retornando a tela anterior...")
+        time.sleep(1)
 
     def update_task(self, task):
         MENU_TEXT = (
             " Gerenciador de Tarefas - Editor de Tarefas\n\n"
+            f"{'...'*20}\n"
             " 1. Titulo\n"
             " 2. Descrição\n"
             " 3. Sair\n"
@@ -67,16 +87,21 @@ class tasks_manager:
                 print(" Opção invalida, retornando ao menu anterior por segurança")
                 time.sleep(1)
                 return "task"
+        print(" Tarefa editada com sucesso!")
+        print(" Retornando ao menu anterior...")
+        time.sleep(1)
 
     def view_task(self):
-        print(" Gerenciador de Tarefas - Vizualizador de Tarefas\n\n")
+        print(f" Gerenciador de Tarefas - Vizualizador de Tarefas\n\n{'...'*20}\n")
         print(" Para ver uma tarefa, faça a busca pelo id.")
         matched_task = self.get_task()
         if matched_task:
             TASK_TEXT = (
                 f" | {matched_task['name']} |\n\n"
-                f" | Description: \n"
+                f"{'...'*20}\n"
+                f" | Descrição: \n"
                 f" {matched_task['description']}\n\n"
+                f"{'...'*20}\n"
                 f" 1. Editar tarefa \n"
                 f" 2. Excluir tarefa\n"
                 f" 3. sair\n"
@@ -87,8 +112,12 @@ class tasks_manager:
             match choice:
                 case "1":
                     self.update_task(matched_task)
+                case "2":
+                    self.remove_task(matched_task)
+                    self.db.save(self.data)
                 case "3":
-                    return "task"
+                    print(" Retornando a tela anterior...")
+                    time.sleep(1)
                 case _:
                     print("Opção invalida")
                     time.sleep(1)
@@ -98,10 +127,13 @@ class tasks_manager:
 
 
     def view_all_tasks(self):
-        print(" Gerenciador de tarefas - vizualizador de tarefas (todas)\n\n")
+        print(f" Gerenciador de tarefas - vizualizador de tarefas (todas)\n\n{'...'*20}\n")
         for task in self.data:
-            print(f" | {task['name']} | {task['id']}")
+            short = self.shorten(task["name"])
+            print(f" | {short:<21} | {task['id']}")
         input("pressione qualquer tecla para retornar")
+        print(" Retornando a tela anterior...")
+        time.sleep(1)
 
     def save_tasks(self, new_data):
         self.db.save(new_data)
@@ -111,3 +143,6 @@ class tasks_manager:
         target = int(input(" ID: "))
         matched_task = next((task for task in self.data if task['id'] == target), None)
         return matched_task
+
+    def shorten(self, text, limit=20):
+        return text if len(text) <= limit else text[:limit-3] + "..."
