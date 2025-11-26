@@ -26,7 +26,7 @@ def main_screen():
     )
 
     print(MENU_TEXT)
-    choice = input(f"{ls_colors.theme['terminal']}>>> {ls_colors.theme['end']}")
+    choice = input(f"{ls_colors.theme['shell']}>>> {ls_colors.theme['end']}")
     match choice:
         case "1":
             return "task"
@@ -45,17 +45,17 @@ def main_screen():
 def tasks_screen():
     MENU_TEXT = (
         f"{ls_colors.theme['title']} Gerenciador de Tarefas - Tela de Tarefas\n\n {ls_colors.theme['end']}"
-        f"{'...'*20}\n"
-        " 1. Ver todas as tarefas\n"
+        f"{ls_colors.theme['line']}{'...'*20}\n {ls_colors.theme['end']}"
+        f"{ls_colors.theme['menu']}1. Ver todas as tarefas\n"
         " 2. Ver uma tarefa\n"
         " 3. Criar uma tarefa\n"
         " 4. Salvar tarefas\n"
         " 5. Limpar tela\n"
-        " 6. Voltar\n"
+        f" 6. Voltar\n{ls_colors.theme['end']}"
 
     )
     print(MENU_TEXT)
-    choice = input(">>> ")
+    choice = input(f"{ls_colors.theme['shell']}>>> {ls_colors.theme['end']}")
 
     match choice:
         case "1":
@@ -89,14 +89,14 @@ def tasks_screen():
 def config_screen():
     MENU_TEXT = (
         f"{ls_colors.theme['title']} Gerenciador de tarefas - Tela de configuração\n\n {ls_colors.theme['end']}"
-        f"{'...'*20}\n"
-        " 1. Banco de dados\n"
+        f"{ls_colors.theme['line']}{'...'*20}\n {ls_colors.theme['end']}"
+        f" {ls_colors.theme['menu']}1. Banco de dados\n"
         " 2. Cores\n"
         " 3. Limpar tela\n"
-        " 4. Voltar\n"
+        f" 4. Voltar\n {ls_colors.theme['end']}"
     )
     print(MENU_TEXT)
-    choice = input(">>> ")
+    choice = input(f"{ls_colors.theme['shell']}>>> {ls_colors.theme['end']}")
     match choice:
         case "1":
             print(" tudo ok com banco de dados")

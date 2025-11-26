@@ -5,18 +5,18 @@ class ls_colors:
 
     paleta = {
         "title": colors.blue,
-        "description": colors.dark_blue,
+        "details": colors.dark_blue,
         "line": colors.light_blue,
         "menu": colors.light_blue,
-        "terminal": colors.magenta,
+        "shell": colors.magenta,
         "end": colors.end
     }
     standart = {
         "title": colors.end,
-        "description": colors.end,
+        "details": colors.end,
         "line": colors.end,
         "menu": colors.end,
-        "terminal": colors.end,
+        "shell": colors.end,
         "end": colors.end
     }
 
@@ -25,8 +25,8 @@ class ls_colors:
 class ls_format:
     standart = {
         "title": colors.end,
-        "description": colors.end,
+        "details": colors.end,
         "line": colors.end,
-        "terminal": colors.end,
+        "shell": colors.end,
         "end": colors.end
     }
