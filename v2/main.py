@@ -2,6 +2,7 @@ import os
 import sys
 import time
 
+from configs import ls_colors
 from core.tasks import tasks_manager
 from storage.db_json import JSONdata_base
 
@@ -16,16 +17,16 @@ def screens_control():
 
 def main_screen():
     MENU_TEXT = (
-        " Gerenciador de Tarefas - Tela Principal\n\n"
-        f"{'...'*20}\n"
-        " 1. Tarefas\n"
+        f"{ls_colors.theme['title']} Gerenciador de Tarefas - Tela Principal\n\n {ls_colors.theme['end']}"
+        f"{ls_colors.theme['line']}{'...'*20} {ls_colors.theme['end']}\n "
+        f"{ls_colors.theme['menu']}1. Tarefas\n"
         " 2. Configurações\n"
         " 3. Limpar tela\n"
-        " 4. Sair\n"
+        f" 4. Sair\n {ls_colors.theme['end']}"
     )
 
     print(MENU_TEXT)
-    choice = input(">>> ")
+    choice = input(f"{ls_colors.theme['terminal']}>>> {ls_colors.theme['end']}")
     match choice:
         case "1":
             return "task"
@@ -43,7 +44,7 @@ def main_screen():
             return "main"
 def tasks_screen():
     MENU_TEXT = (
-        "Gerenciador de Tarefas - Tela de Tarefas\n\n"
+        f"{ls_colors.theme['title']} Gerenciador de Tarefas - Tela de Tarefas\n\n {ls_colors.theme['end']}"
         f"{'...'*20}\n"
         " 1. Ver todas as tarefas\n"
         " 2. Ver uma tarefa\n"
@@ -87,7 +88,7 @@ def tasks_screen():
 
 def config_screen():
     MENU_TEXT = (
-        " Gerenciador de tarefas - Tela de configuração\n\n"
+        f"{ls_colors.theme['title']} Gerenciador de tarefas - Tela de configuração\n\n {ls_colors.theme['end']}"
         f"{'...'*20}\n"
         " 1. Banco de dados\n"
         " 2. Cores\n"

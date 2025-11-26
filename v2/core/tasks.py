@@ -42,7 +42,6 @@ class tasks_manager:
             time.sleep(1)
         return "task"
 
-
     def remove_task(self, task):
         MENU_TEXT = (
             " Gerenciador de Tarefas - Editor de Tarefas\n\n"
