@@ -3,9 +3,9 @@ import sys
 import time
 
 from core.tasks import tasks_manager
-from storage.db_json import data_base
+from storage.db_json import JSONdata_base
 
-task_control = tasks_manager(data_base)
+task_control = tasks_manager(JSONdata_base)
 
 def screens_control():
     current = "main"

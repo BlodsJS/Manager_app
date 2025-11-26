@@ -8,7 +8,7 @@ try:
 except Exception as e:
     print(f"erro ao carregar arquivo json: {e}")
 
-class data_base():
+class JSONdata_base():
     data.sort(key=lambda item: item["id"])
     id_current = data[-1]['id'] if data else 0
     @staticmethod

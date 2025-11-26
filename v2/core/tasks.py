@@ -36,6 +36,7 @@ class tasks_manager:
                 "id": new_id
             }
             self.data.append(new_task)
+            self.db.save(self.data)
         else:
             print(" Erro:\n Tarefa sem nome não pode ser adicionada")
             time.sleep(1)
@@ -96,7 +97,7 @@ class tasks_manager:
         print(" Para ver uma tarefa, faça a busca pelo id.")
         matched_task = self.get_task()
         if matched_task:
-            TASK_TEXT = (
+            MENU_TEXT = (
                 f" | {matched_task['name']} |\n\n"
                 f"{'...'*20}\n"
                 f" | Descrição: \n"
@@ -106,12 +107,13 @@ class tasks_manager:
                 f" 2. Excluir tarefa\n"
                 f" 3. sair\n"
             )
-            print(TASK_TEXT)
+            print(MENU_TEXT)
 
             choice = input(">>> ")
             match choice:
                 case "1":
                     self.update_task(matched_task)
+                    self.db.save(self.data)
                 case "2":
                     self.remove_task(matched_task)
                     self.db.save(self.data)
